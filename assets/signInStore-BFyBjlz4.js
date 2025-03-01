@@ -1,1 +1,0 @@
-import{N as e}from"./index-CG6kTogK.js";const o=e("SignInStore",{state:()=>({googleInfo:{name:"",picture:"",email:"",tel:"",address:""},isLogin:!1}),getters:{},actions:{getProducts(){},getSingleProduct(){}}});export{o as u};

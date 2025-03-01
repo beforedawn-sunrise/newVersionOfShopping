@@ -1,0 +1,1 @@
+import{N as e}from"./index-QOAwnqUP.js";const o=e("SignInStore",{state:()=>({googleInfo:{name:"",picture:"",email:"",tel:"",address:""},isLogin:!1}),getters:{},actions:{getProducts(){},getSingleProduct(){}}});export{o as u};
