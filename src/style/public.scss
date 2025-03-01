@@ -1,0 +1,138 @@
+body{
+  margin:0px !important;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+}
+.w-50{
+  width:50%;
+}
+.calc-50{
+  width:calc(50% - 20px);
+  margin-right: 20px;
+}
+
+
+// RWD mixins
+@mixin xs {
+    @media (max-width: 375px) {
+      @content;
+    }
+  }
+
+  @mixin sm {
+    @media (max-width: 576px) {
+      @content;
+    }
+  }
+
+  @mixin md {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+  @mixin lg {
+    @media (max-width: 992px) {
+      @content;
+    }
+  }
+  @mixin xl {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  }
+  @mixin xxl {
+    @media (max-width: 1400px) {
+      @content;
+    }
+  }
+
+  @mixin xxxl {
+    @media (max-width: 1600px) {
+      @content;
+    }
+  }
+
+  @mixin xxxxl {
+    @media (max-width: 1800px) {
+      @content;
+    }
+  }
+
+
+  // margin-top:10 ~ 75px;
+@for $h from 2 through 15 {
+    .mt-#{$h * 5} {
+      margin-top: $h * 5px !important;
+    }
+  }
+  // margin-bottom:10 ~ 55px;
+  @for $h from 2 through 15 {
+    .mb-#{$h * 5} {
+      margin-bottom: $h * 5px !important;
+    }
+  }
+  // margin-right:10 ~ 55px;
+  @for $h from 2 through 11 {
+    .mr-#{$h * 5} {
+      margin-right: $h * 5px !important;
+    }
+  }
+  // margin-left:10 ~ 55px;
+  @for $h from 2 through 11 {
+      .ml-#{$h * 5} {
+        margin-left: $h * 5px !important;
+      }
+  }
+
+  @for $h from 2 through 11 {
+    .m-#{$h * 5} {
+      margin: $h * 5px !important;
+    }
+  }
+  // padding-top:10 ~ 75px;
+  @for $h from 2 through 20 {
+    .pt-#{$h * 5} {
+      padding-top: $h * 5px !important;
+    }
+  }
+  // padding-bottom:10 ~ 55px;
+  @for $h from 2 through 11 {
+    .pb-#{$h * 5} {
+      padding-bottom: $h * 5px !important;
+    }
+  }
+
+  // padding-bottom:10 ~ 55px;
+  @for $h from 2 through 11 {
+    .pb-#{$h * 5} {
+      padding-bottom: $h * 5px !important;
+    }
+  }
+
+  @for $h from 2 through 11 {
+    .pl-#{$h * 5} {
+      padding-left: $h * 5px !important;
+    }
+  }
+
+  // padding:10 ~ 55px;
+  @for $h from 2 through 11 {
+  .p-#{$h * 5} {
+    padding: $h * 5px !important;
+  }
+  }
+  // font-size:1~60px;
+  @for $i from 1 through 60 {
+    .fs-#{$i} {
+      font-size: $i * 1px !important;
+    }
+  }
+
+  @for $i from 1 through 30 {
+    .lh-#{$i} {
+      line-height: $i * 1px !important;
+    }
+  }
