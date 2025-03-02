@@ -113,13 +113,14 @@
 .table-container {
     margin-top: 30px;
     width: 100%;
-    min-width: 517px;
+    // min-width: 517px;
     height: calc(100% - 30px);
     // display: flex;
     // justify-content: center;
     // align-items: center;
     border-radius: 20px;
     overflow-y: auto;
+    overflow-x: scroll !important;
 
     table {
         width: 100%;
@@ -127,7 +128,7 @@
         border-collapse: separate;
         border-spacing: 0;
         position: relative;
-        overflow-x: scroll !important;
+
 
         // 表格頭樣式
         th {

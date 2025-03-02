@@ -3,7 +3,8 @@
     <!-- <signInModal v-if="isOpenSignIn"></signInModal> -->
     <nav>
         <Bars3Icon class="icon hamburger" @click="isSlide = !isSlide" />
-        <p class="md-title" @click="router.push('/')">雲購物</p>
+        <p class="md-title" @click="goHome">雲購物</p>
+        <div class="md-backdrop" @click="isSlide = false" v-if="isSlide == true"></div>
         <ul class="hamburger-menu" :class="{ 'menu-flex': isSlide }">
             <li>
                 <p class="pc-title" @click="router.push('/')">雲購物</p>
@@ -17,16 +18,16 @@
         </ul>
         <ul>
             <li>
-                <HeartIcon class="icon" @click="router.push('/wishlist')" />
+                <HeartIcon class="icon" @click="router.push('/wishlist'), isSlide = false" />
             </li>
             <li>
-                <ShoppingBagIcon class="icon" @click="router.push('/cart')" />
+                <ShoppingBagIcon class="icon" @click="router.push('/cart'), isSlide = false" />
 
             </li>
             <li>
-                <img :src="googleInfo.picture" class="google-picture" alt=""
-                    v-if="googleInfo.picture !== ''" @click="isOpenPersonalInfo = !isOpenPersonalInfo">
-                <UserCircleIcon class="icon" v-if="googleInfo.picture === ''"/>
+                <img :src="googleInfo.picture" class="google-picture" alt="" v-if="googleInfo.picture !== ''"
+                    @click="isOpenPersonalInfo = !isOpenPersonalInfo, isSlide = false">
+                <UserCircleIcon class="icon" v-if="googleInfo.picture === ''" />
             </li>
             <!-- <li>
                 <p class="hello-name" v-if="google.googleInfo.name != ''">{{ google.googleInfo.name }},您好</p>
@@ -35,7 +36,7 @@
     </nav>
     <div class="personal-container" v-if="isOpenPersonalInfo">
         <p>{{ googleInfo.name }},您好</p>
-        <p @click="router.push('/myOrder')">我的訂單</p>
+        <p @click="router.push('/myOrder'), isOpenPersonalInfo = false">我的訂單</p>
         <p @click="logout">登出</p>
     </div>
     <router-view></router-view>
@@ -50,7 +51,18 @@ nav {
     justify-content: space-around;
     padding: 10px;
 
-
+    @include md {
+        .md-backdrop {
+            position: fixed;
+            top: 68px;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            min-height: 100vh;
+            background-color: rgba($color: #ffffff, $alpha: 0.5);
+            z-index: 999;
+        }
+    }
 
     .hamburger {
         display: none;
@@ -106,6 +118,7 @@ nav {
 
     @include md {
         justify-content: space-between;
+        z-index: 9999;
 
         .hamburger {
             display: block;
@@ -115,7 +128,7 @@ nav {
         .hamburger-menu {
             position: fixed;
             left: -120%;
-            top: 68px;
+            top: 50px;
             width: 75%;
             min-height: 100%;
             // display: none;
@@ -251,6 +264,7 @@ const isLoading = ref(false);
 
 // const products = ref([] as productManageModel[])
 
+const copyProducts = ref([]);
 // 撈一次資料
 const getProducts = async () => {
     isLoading.value = true;
@@ -263,12 +277,20 @@ const getProducts = async () => {
             /* 取得產品資料 */
             isLoading.value = false;
             frontStage.productList = response.data.products;
+            copyProducts.value = response.data.products;
 
             for (let item of frontStage.productList) {
                 item.isInWishList = false;
             }
         }
     })
+}
+
+const goHome = () => {
+    router.push('/');
+    frontStage.productList = Object.assign(copyProducts.value);
+    console.log('hungry', frontStage.productList);
+    isSlide.value = false;
 }
 
 const sessionIsLogin = ref(false);
@@ -281,12 +303,12 @@ const googleInfo = ref({
 })
 function updateSession() {
     const login = sessionStorage.getItem('sessionIsLogin');
-    if(login !== null){
+    if (login !== null) {
         console.log('a');
         sessionIsLogin.value = true;
     }
     const info = sessionStorage.getItem('sessionGoogleInfo');
-    if(info !== null){
+    if (info !== null) {
         console.log('b');
         googleInfo.value = JSON.parse(info);
     }
@@ -304,8 +326,8 @@ onUnmounted(() => {
 // watchEffect(() => {
 // });
 
-const logout = ()=>{
-    sessionIsLogin.value = false ;
+const logout = () => {
+    sessionIsLogin.value = false;
     googleInfo.value = {
         name: '',
         picture: '',
@@ -316,6 +338,7 @@ const logout = ()=>{
     sessionStorage.clear();
     localStorage.clear();
     frontStage.myPiniaOrder = [] as orderModel[];
+    isOpenPersonalInfo.value = false;
 }
 const toSearch = () => {
     isSlide.value = false;
@@ -324,7 +347,13 @@ const toSearch = () => {
 
     //     }
     // }
+    frontStage.productList = [...copyProducts.value];
+    if (searchText.value == '') {
+        frontStage.productList = [...copyProducts.value];
+    } else {
+        frontStage.productList = [...copyProducts.value];
+        frontStage.productList = frontStage.productList.filter(item => item.title.includes(searchText.value));
 
-    frontStage.productList = frontStage.productList.filter(item => item.title.includes(searchText.value));
+    }
 }
 </script>

@@ -66,6 +66,9 @@
     justify-content: center;
     z-index: 999;
 
+    @include md {
+        justify-content: flex-start;
+    }
 
     .modal {
         width: 900px;
@@ -117,6 +120,11 @@
                 outline: none;
                 border: 1px solid gray;
                 font-size: 18px;
+
+                @include md {
+                    height: 25px;
+                    font-size: 16px;
+                }
             }
 
             textarea {
@@ -126,6 +134,11 @@
                 outline: none;
                 border: 1px solid gray;
                 font-size: 18px;
+
+                @include md {
+                    height: 50px;
+                    font-size: 16px;
+                }
             }
 
             p {
@@ -140,6 +153,7 @@
                 height: 100%;
                 margin-right: 20px;
                 // background-color: pink;
+
 
                 img {
                     width: 100%;
@@ -188,7 +202,15 @@
                 flex-direction: column;
 
                 .img-space {
-                    width: 100%;
+                    width: 200px;
+                    height: auto;
+                    // height: 200px;
+
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
+
                 }
 
                 .main-space {

@@ -74,7 +74,7 @@ const adminLogin = async () => {
     })
 }
 
-const callback = async(response: any) => {
+const callback = async (response: any) => {
     if (response.credential) {
         const credential: googleInfoModel = jwtDecode(response.credential);
         console.log(credential);
@@ -82,12 +82,12 @@ const callback = async(response: any) => {
             name: credential.name,
             picture: credential.picture,
             email: credential.email,
-            tel:'',
-            address:''
+            tel: '',
+            address: ''
         }
         login.isLogin = true;
-        sessionStorage.setItem('sessionIsLogin',JSON.stringify(true));
-        sessionStorage.setItem('sessionGoogleInfo',JSON.stringify(login.googleInfo));
+        sessionStorage.setItem('sessionIsLogin', JSON.stringify(true));
+        sessionStorage.setItem('sessionGoogleInfo', JSON.stringify(login.googleInfo));
         window.dispatchEvent(new Event('sessionUpdated'));
 
         let database;
@@ -122,6 +122,11 @@ const callback = async(response: any) => {
         background-color: #FEDFE1;
         border: 1px solid #D0104C;
         z-index: 999;
+
+
+        @include sm {
+            width: 80%;
+        }
 
         .hint {
             background-color: rgba(205, 127, 79, 0.8);

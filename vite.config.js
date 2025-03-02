@@ -2,11 +2,9 @@ import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import mkcert from "vite-plugin-mkcert";
 import vue from "@vitejs/plugin-vue";
-// import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
-import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: "./",
+    base: "/newVersionOfShopping/",
     plugins: [
         vue(),
         // VueI18nPlugin({
@@ -23,14 +21,6 @@ export default defineConfig({
         preprocessorOptions: {
             scss: {
                 additionalData: "@use \"./src/style/public.scss\" as *;",
-            },
-        },
-    },
-    build: {
-        outDir: "../dist",
-        rollupOptions: {
-            input: {
-                main: path.resolve(__dirname, "src/main.ts"),
             },
         },
     },
